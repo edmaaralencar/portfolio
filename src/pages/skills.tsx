@@ -30,7 +30,7 @@ const Skills: React.FC = () => {
             <div className="skills-list">
               <p>Conhecimentos</p>
               <ul>
-                <li>Estilização (Styled Components, Chakra)</li>
+                <li>Estilização (Styled Components, ChakraUI)</li>
                 <li>Hooks</li>
                 <li>Context API</li>
                 <li>Redux</li>
