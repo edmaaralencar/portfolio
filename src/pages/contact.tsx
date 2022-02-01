@@ -51,6 +51,18 @@ const Contact: React.FC = () => {
     <>
       <Head>
         <title>Contato | Portfólio</title>
+        <meta
+          name="description"
+          content="Sou um desenvolvedor Web especializado em Front-end e nesse site mostro alguns projetos desenvolvidos por mim.!"
+        />
+        <meta property="og:image" content="/ogimage.png" />
+        <meta property="og:image:secure_url" content="/ogimage.png" />
+        <meta name="twitter:image" content="/ogimage.png" />
+        <meta name="twitter:image:src" content="/ogimage.png" />
+        <meta
+          property="og:description"
+          content="Sou um desenvolvedor Web especializado em Front-end e nesse site mostro alguns projetos desenvolvidos por mim.!"
+        />
       </Head>
       <Wrapper onSubmit={handleSubmit}>
         <h1>Entre em contato</h1>

@@ -20,7 +20,7 @@ export const Container = styled.header`
   button {
     display: none;
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       display: block;
 
       position: fixed;
@@ -31,15 +31,18 @@ export const Container = styled.header`
   }
 
   .logo {
+    text-decoration: none;
+    display: block;
     display: flex;
     align-items: center;
+    color: #ffffff;
 
     div {
       background-color: ${props => props.theme.colors.primary};
       width: 4px;
       height: 45px;
 
-      @media (max-width: 980px) {
+      @media (max-width: 1000px) {
         height: 35px;
       }
     }
@@ -49,7 +52,7 @@ export const Container = styled.header`
       font-weight: bold;
       margin-left: 1rem;
 
-      @media (max-width: 980px) {
+      @media (max-width: 1000px) {
         font-size: 2.5rem;
       }
     }
@@ -59,26 +62,30 @@ export const Container = styled.header`
 export const Navbar = styled.nav`
   display: flex;
   align-items: center;
-  gap: 4rem;
+  gap: 3.2rem;
 
-  @media (max-width: 850px) {
+  @media (max-width: 930px) {
+    gap: 3rem;
+  }
+
+  @media (max-width: 880px) {
     display: none;
   }
 
   a {
     text-decoration: none;
-    color: #737380;
+    color: #d6d6d6;
     list-style: none;
     font-size: 2rem;
-    color: #737380;
     font-weight: 400;
     text-decoration: none;
+    transition: color 0.5s;
   }
 
   .btn-contact {
-    background: #ffffff;
+    background: ${props => props.theme.colors.primary};
     padding: 1rem 2rem;
-    color: #171717;
+    color: #ffffff;
     border-radius: 8px;
   }
 

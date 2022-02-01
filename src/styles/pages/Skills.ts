@@ -5,14 +5,14 @@ export const Wrapper = styled.section`
   width: 100%;
   padding: 0 2rem;
   margin: 0 auto;
-  margin-top: 6.4rem;
+  margin-top: 5.6rem;
   margin-bottom: 4rem;
 `
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8rem;
+  gap: 4rem 8rem;
 
   @media (max-width: 1350px) {
     gap: 6rem;
@@ -34,7 +34,7 @@ type SkillsBoxProps = {
 
 export const SkillsBox = styled.div<SkillsBoxProps>`
   background-color: #202024;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   padding: 2.4rem;
   color: #e1e1e6;
 

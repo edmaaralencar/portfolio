@@ -2,16 +2,25 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.form`
   background-color: #202024;
-  padding: 5rem;
+  padding: 4rem 5rem;
   width: 100%;
   max-width: 60rem;
   margin: 3rem auto;
   border-radius: 0.8rem;
 
+  @media (max-width: 610px) {
+    margin: 3rem 2rem;
+    width: auto;
+  }
+
   h1 {
     font-size: 4rem;
     font-weight: bold;
     margin-bottom: 3.2rem;
+
+    @media (max-width: 480px) {
+      font-size: 3.2rem;
+    }
   }
 
   button {
@@ -33,7 +42,7 @@ export const InputBox = styled.div`
   flex-direction: column;
   gap: 1.6rem;
 
-  margin-bottom: 2rem;
+  margin-bottom: 2.4rem;
 
   label {
     color: #e1e1e6;

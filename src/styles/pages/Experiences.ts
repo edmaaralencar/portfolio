@@ -21,7 +21,7 @@ export const Container = styled.div`
   }
 
   .left-part {
-    width: 30%;
+    width: 38%;
     display: table-cell;
     padding-right: 25px;
     min-height: 100%;
@@ -40,6 +40,10 @@ export const Container = styled.div`
       color: #e2e2e2;
       font-size: 4rem;
       font-weight: bold;
+
+      @media (max-width: 780px) {
+        font-size: 3.2rem;
+      }
     }
 
     span {

@@ -6,12 +6,25 @@ import { Wrapper, Container, SkillsBox } from '../styles/pages/Skills'
 import reactImage from '../assets/reactjs.png'
 import nodeImage from '../assets/nodejs.png'
 import javascriptImage from '../assets/javascript.png'
+import typescriptImage from '../assets/typescript.png'
 
 const Skills: React.FC = () => {
   return (
     <>
       <Head>
         <title>Habilidades | Portfólio</title>
+        <meta
+          name="description"
+          content="Sou um desenvolvedor Web especializado em Front-end e nesse site mostro alguns projetos desenvolvidos por mim.!"
+        />
+        <meta property="og:image" content="/ogimage.png" />
+        <meta property="og:image:secure_url" content="/ogimage.png" />
+        <meta name="twitter:image" content="/ogimage.png" />
+        <meta name="twitter:image:src" content="/ogimage.png" />
+        <meta
+          property="og:description"
+          content="Sou um desenvolvedor Web especializado em Front-end e nesse site mostro alguns projetos desenvolvidos por mim.!"
+        />
       </Head>
       <Wrapper>
         <Container>
@@ -67,6 +80,29 @@ const Skills: React.FC = () => {
                 <h4>Ling. de programação</h4>
               </div>
               <img src={javascriptImage} alt="Javascript" />
+            </div>
+            <p className="desc">
+              Javascript é uma linguagem de programação aplamente flexível
+              podendo ser utilizada no front-end, back-end, mobile e até
+              desktop.
+            </p>
+            <div className="skills-list">
+              <p>Conhecimentos</p>
+              <ul>
+                <li>CRUD</li>
+                <li>API Rest</li>
+                <li>Autenticação (JWT)</li>
+                <li>MongoDB</li>
+              </ul>
+            </div>
+          </SkillsBox>
+          <SkillsBox color="#36A3DC">
+            <div className="title">
+              <div className="text">
+                <h3>Typescript</h3>
+                <h4>Ling. de programação</h4>
+              </div>
+              <img src={typescriptImage} alt="Typescript" />
             </div>
             <p className="desc">
               Javascript é uma linguagem de programação aplamente flexível

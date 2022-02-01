@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 
 import { Container, Navbar, ResponsiveNavbar, ResponsiveSpan } from './styles'
-import { useRouter } from 'next/router'
 
 import NavLink from '../NavLink'
 
@@ -12,20 +11,21 @@ import CloseIcon from '../../assets/close.svg'
 const Header: React.FC = () => {
   const [openSidebar, setOpenSidebar] = useState(false)
 
-  const router = useRouter()
-
   const handleOpenSidebar = () => setOpenSidebar(true)
   const handleCloseSidebar = () => setOpenSidebar(false)
 
   return (
     <Container>
-      <div className="logo">
-        <div></div>
-        <span>Edmar Alencar</span>
-      </div>
+      <Link href="/">
+        <a className="logo">
+          <div></div>
+          <span>Edmar Alencar</span>
+        </a>
+      </Link>
 
       <Navbar>
         <NavLink pathname="/" title="Início" />
+        <NavLink pathname="/about" title="Sobre" />
         <NavLink pathname="/skills" title="Habilidades" />
         <NavLink pathname="/experiences" title="Experiência" />
         <NavLink pathname="/projects" title="Portfólio" />
@@ -58,6 +58,12 @@ const Header: React.FC = () => {
             isResponsive={true}
             pathname="/"
             title="Início"
+          />
+          <NavLink
+            setOpenSidebar={setOpenSidebar}
+            isResponsive={true}
+            pathname="/about"
+            title="Sobre"
           />
           <NavLink
             setOpenSidebar={setOpenSidebar}

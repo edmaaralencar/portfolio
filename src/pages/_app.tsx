@@ -7,6 +7,7 @@ import GlobalStyle from '../styles/global'
 import theme from '../styles/theme'
 
 import Header from '../components/Header'
+// import SocialMedia from '../components/SocialMedia'
 
 import { ToastContainer } from 'react-toastify'
 
