@@ -76,7 +76,7 @@ export default Projects
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient()
 
-  const projectResponse = await prismic.query(
+  const projectResponse: any = await prismic.query(
     [Prismic.Predicates.at('document.type', 'project')],
     { orderings: '[document.first_publication_date]' }
   )

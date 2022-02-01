@@ -61,18 +61,20 @@ export default Experiences
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient()
 
-  const projectResponse = await prismic.query(
+  const experiencesResponse: any = await prismic.query(
     [Prismic.Predicates.at('document.type', 'experience')],
     { orderings: '[document.first_publication_date]' }
   )
 
-  const experiences = projectResponse.results.map(experience => ({
+  const experiences = experiencesResponse.results.map(experience => ({
     slug: experience.uid,
     title: experience.data.title,
     description: experience.data.description,
     company: experience.data.company,
     date: experience.data.date
   }))
+
+  console.log(experiences)
 
   return {
     props: {
