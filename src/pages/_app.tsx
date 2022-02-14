@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -11,7 +11,7 @@ import Header from '../components/Header'
 
 import { ToastContainer } from 'react-toastify'
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Header />

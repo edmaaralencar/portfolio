@@ -97,8 +97,9 @@ export const Container = styled.div`
     }
 
     p {
-      color: #a1a1a1;
-      font-size: 1.6rem;
+      color: rgb(161, 161, 161);
+      font-size: 1.8rem;
+      line-height: 2.6rem;
     }
   }
 `

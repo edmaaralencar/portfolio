@@ -74,8 +74,6 @@ export const getStaticProps: GetStaticProps = async () => {
     date: experience.data.date
   }))
 
-  console.log(experiences)
-
   return {
     props: {
       experiences

@@ -52,8 +52,12 @@ export const ProjectBox = styled.div`
 
     ul {
       margin-left: 3.2rem;
-      display: flex;
+      /* display: flex;
       flex-direction: column;
+      gap: 0.8rem; */
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 0.8rem;
     }
   }
