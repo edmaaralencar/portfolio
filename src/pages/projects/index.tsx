@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
+import { AnimatePresence } from 'framer-motion'
 
 import {
   Wrapper,
@@ -93,23 +94,30 @@ const Projects = ({ projects }: ProjectsProps) => {
             Full-stack
           </Category>
         </Categories>
-        <Container>
+        <Container layout>
           {filteredProjects?.map(project => (
-            <ProjectBox key={project?.slug}>
-              <img src={project?.image[0].url} alt={project?.title} />
-              <h1>{project?.title}</h1>
-              <div className="tech">
-                <h2>Tecnologias utilizadas:</h2>
-                <ul>
-                  {project?.technologies.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <Link href={`/projects/${project?.slug}`} passHref>
-                <a href="">Ver mais</a>
-              </Link>
-            </ProjectBox>
+            <AnimatePresence key={project?.slug}>
+              <ProjectBox
+                layout
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+              >
+                <img src={project?.image[0].url} alt={project?.title} />
+                <h1>{project?.title}</h1>
+                <div className="tech">
+                  <h2>Tecnologias utilizadas:</h2>
+                  <ul>
+                    {project?.technologies.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <Link href={`/projects/${project?.slug}`} passHref>
+                  <a href="">Ver mais</a>
+                </Link>
+              </ProjectBox>
+            </AnimatePresence>
           ))}
         </Container>
       </Wrapper>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 interface CategoryProps {
   isActive: boolean
@@ -34,7 +35,7 @@ export const Category = styled.button<CategoryProps>`
   border-radius: 0.5rem;
 `
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5.6rem;
@@ -49,7 +50,7 @@ export const Container = styled.div`
   }
 `
 
-export const ProjectBox = styled.div`
+export const ProjectBox = styled(motion.div)`
   background-color: #202024;
   border-radius: 0.8rem;
   padding: 2.4rem;
