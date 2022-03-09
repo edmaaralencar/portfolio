@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
 import { Wrapper, Container } from '../styles/pages/Experiences'
-
-import { getPrismicClient } from '../services/prismic'
-import Prismic from '@prismicio/client'
+import { GET_EXPERIENCES } from 'graphql/queries'
+import { GetExperiencesQuery } from 'graphql/generated/graphql'
+import client from 'graphql/client'
 
 interface IExperience {
   slug: string
@@ -39,15 +40,15 @@ const Experiences = ({ experiences }: ExperiencesProps) => {
       </Head>
       <Wrapper>
         {experiences.map(experience => (
-          <Container key={experience.slug}>
+          <Container key={experience?.slug}>
             <div className="left-part">
-              <h5>{experience.company}</h5>
-              <span>{experience.date}</span>
+              <h5>{experience?.company}</h5>
+              <span>{experience?.date}</span>
             </div>
             <div className="divider"></div>
             <div className="right-part">
-              <h4>{experience.title}</h4>
-              <p>{experience.description}</p>
+              <h4>{experience?.title}</h4>
+              <p>{experience?.description}</p>
             </div>
           </Container>
         ))}
@@ -59,20 +60,9 @@ const Experiences = ({ experiences }: ExperiencesProps) => {
 export default Experiences
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prismic = getPrismicClient()
-
-  const experiencesResponse: any = await prismic.query(
-    [Prismic.Predicates.at('document.type', 'experience')],
-    { orderings: '[document.first_publication_date]' }
+  const { experiences } = await client.request<GetExperiencesQuery>(
+    GET_EXPERIENCES
   )
-
-  const experiences = experiencesResponse.results.map(experience => ({
-    slug: experience.uid,
-    title: experience.data.title,
-    description: experience.data.description,
-    company: experience.data.company,
-    date: experience.data.date
-  }))
 
   return {
     props: {

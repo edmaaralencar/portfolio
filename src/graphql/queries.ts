@@ -37,3 +37,15 @@ export const GET_PROJECT_BY_SLUG = gql`
     }
   }
 `
+
+export const GET_EXPERIENCES = gql`
+  query getExperiences {
+    experiences {
+      title
+      description
+      slug
+      date
+      company
+    }
+  }
+`
