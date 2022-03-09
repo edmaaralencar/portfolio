@@ -6,8 +6,8 @@ import { GetStaticProps } from 'next'
 import { Wrapper, Container } from '../styles/pages/Experiences'
 import { GET_EXPERIENCES } from 'graphql/queries'
 import { GetExperiencesQuery } from 'graphql/generated/graphql'
-import client from 'graphql/client'
 
+import client from 'graphql/client'
 interface IExperience {
   slug: string
   title: string
