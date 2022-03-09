@@ -1,34 +1,36 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable camelcase */
 import React from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { GetStaticPaths, GetStaticProps } from 'next'
-
-import { getPrismicClient } from '../../services/prismic'
-import Prismic from '@prismicio/client'
 
 import { Wrapper } from '../../styles/pages/Project'
 import LoadingScreen from '../../components/LoadingScreen'
 
 import GithubIcon from '../../assets/github.svg'
-
-interface IProject {
-  slug: string
-  title: string
-  image: {
-    alt: string
-    url: string
-  }
-  techs: Array<{
-    tech: string
-  }>
-  description: Array<unknown>
-  github_link: string
-  website_link: string
-}
+import { GET_PROJECTS, GET_PROJECT_BY_SLUG } from 'graphql/queries'
+import {
+  GetProjectBySlugQuery,
+  GetProjectsQuery
+} from 'graphql/generated/graphql'
+import client from 'graphql/client'
+import { GetStaticProps } from 'next'
 
 interface ProjectProps {
-  project: IProject
+  project: {
+    slug: string
+    title: string
+    image: Array<{
+      url: string
+    }>
+    technologies: Array<string>
+    description: {
+      html: string
+    }
+    github_link: string
+    website_link: string
+    category: string
+  }
 }
 
 const Projects = ({ project }: ProjectProps) => {
@@ -43,47 +45,52 @@ const Projects = ({ project }: ProjectProps) => {
       <Head>
         <title>{project?.title} | Portfólio</title>
         <meta name="description" content={project?.title} />
-        <meta property="og:image" content={project?.image.url} />
-        <meta property="og:image:secure_url" content={project?.image.url} />
-        <meta name="twitter:image" content={project?.image.url} />
-        <meta name="twitter:image:src" content={project?.image.url} />
+        <meta property="og:image" content={project?.image[0].url} />
+        <meta property="og:image:secure_url" content={project?.image[0].url} />
+        <meta name="twitter:image" content={project?.image[0].url} />
+        <meta name="twitter:image:src" content={project?.image[0].url} />
         <meta property="og:description" content={project?.title} />
       </Head>
       <Wrapper>
         <div className="img-wrapper">
-          <img src={project?.image.url} alt={project?.image.alt} />
+          <img src={project.image[0].url} alt={project.title} />
         </div>
 
         <div className="content-wrapper">
           <h1>{project?.title}</h1>
 
-          {project?.description.map((desc, index) => (
-            <p className="description" key={index}>
-              {desc[0].text}
-            </p>
-          ))}
+          <div
+            className="description"
+            dangerouslySetInnerHTML={{
+              __html: project?.description?.html || ''
+            }}
+          />
 
           <div className="techs">
             <h3>Tecnologias utilizadas:</h3>
             <ul>
-              {project?.techs.map((item, index) => (
-                <li key={index}>{item.tech}</li>
+              {project?.technologies.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
 
           <div className="cta">
-            <a target="_blank" rel="noreferrer" href={project?.github_link}>
-              <GithubIcon /> Github
-            </a>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              className="outlined"
-              href={project?.website_link}
-            >
-              Site
-            </a>
+            {project?.github_link !== null && (
+              <a target="_blank" rel="noreferrer" href={project?.github_link}>
+                <GithubIcon /> Github
+              </a>
+            )}
+            {project?.website_link !== null && (
+              <a
+                target="_blank"
+                rel="noreferrer"
+                className="outlined"
+                href={project?.website_link}
+              >
+                Site
+              </a>
+            )}
           </div>
         </div>
       </Wrapper>
@@ -93,43 +100,21 @@ const Projects = ({ project }: ProjectProps) => {
 
 export default Projects
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const prismic = getPrismicClient()
+export const getStaticPaths = async () => {
+  const { projects } = await client.request<GetProjectsQuery>(GET_PROJECTS)
 
-  const projects = await prismic.query([
-    Prismic.predicates.at('document.type', 'project')
-  ])
+  const paths = projects.map(({ slug }) => ({ params: { slug } }))
 
-  const paths = projects.results.map(project => ({
-    params: {
-      slug: project.uid
-    }
-  }))
-
-  return {
-    paths,
-    fallback: true
-  }
+  return { paths, fallback: true }
 }
 
-export const getStaticProps: GetStaticProps = async context => {
-  const prismic = getPrismicClient()
-  const { slug } = context.params
-
-  const response: any = await prismic.getByUID('project', String(slug), {})
-
-  const project = {
-    slug: response.uid,
-    title: response.data.title,
-    image: {
-      url: response.data.image.url,
-      alt: response.data.image.alt
-    },
-    techs: response.data.techs,
-    github_link: response.data.github_link.url,
-    website_link: response.data.website_link.url,
-    description: response.data.body.map(desc => desc.primary.text)
-  }
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { project } = await client.request<GetProjectBySlugQuery>(
+    GET_PROJECT_BY_SLUG,
+    {
+      slug: `${params.slug}`
+    }
+  )
 
   return {
     props: {

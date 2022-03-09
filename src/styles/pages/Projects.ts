@@ -1,10 +1,37 @@
 import styled from 'styled-components'
 
+interface CategoryProps {
+  isActive: boolean
+}
+
 export const Wrapper = styled.section`
   max-width: ${props => props.theme.container};
   width: 100%;
   padding: 0 2rem;
   margin: 5.6rem auto;
+`
+
+export const Categories = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  margin-bottom: 3.2rem;
+`
+
+export const Category = styled.button<CategoryProps>`
+  padding: 1.3rem 2rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+  cursor: pointer;
+
+  background-color: ${({ theme, isActive }) =>
+    isActive ? theme.colors.primary : 'transparent'};
+  border: ${({ theme, isActive }) =>
+    isActive
+      ? `1px solid ${theme.colors.primary}`
+      : `1px solid ${theme.colors.primary}`};
+  border-radius: 0.5rem;
 `
 
 export const Container = styled.div`
