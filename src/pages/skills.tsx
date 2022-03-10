@@ -1,14 +1,32 @@
-import Head from 'next/head'
 import React from 'react'
+import Head from 'next/head'
+import { GetStaticProps } from 'next'
 
 import { Wrapper, Container, SkillsBox } from '../styles/pages/Skills'
 
-import reactImage from '../assets/reactjs.png'
-import nodeImage from '../assets/nodejs.png'
-import javascriptImage from '../assets/javascript.png'
-import typescriptImage from '../assets/typescript.png'
+import { GET_SKILLS } from 'graphql/queries'
+import { GetSkillsQuery } from 'graphql/generated/graphql'
+import client from 'graphql/client'
 
-const Skills: React.FC = () => {
+interface ISkills {
+  id: string
+  title: string
+  category: string
+  description: string
+  skills: Array<string>
+  image: {
+    url: string
+  }
+  color: string
+}
+
+interface SkillsProps {
+  skills: ISkills[]
+}
+
+const Skills = ({ skills }: SkillsProps) => {
+  console.log(skills)
+
   return (
     <>
       <Head>
@@ -28,97 +46,26 @@ const Skills: React.FC = () => {
       </Head>
       <Wrapper>
         <Container>
-          <SkillsBox color="#0D91DE">
-            <div className="title">
-              <div className="text">
-                <h3>ReactJS</h3>
-                <h4>Front-end</h4>
+          {skills.map(skill => (
+            <SkillsBox key={skill?.id} color={skill?.color}>
+              <div className="title">
+                <div className="text">
+                  <h3>{skill?.title}</h3>
+                  <h4>{skill?.category}</h4>
+                </div>
+                <img src={skill?.image?.url} alt={skill?.title} />
               </div>
-              <img src={reactImage} alt="ReactJS" />
-            </div>
-            <p className="desc">
-              React é uma biblioteca Javascript de front-end utilizada na
-              construção de interfaces web.
-            </p>
-            <div className="skills-list">
-              <p>Conhecimentos</p>
-              <ul>
-                <li>Estilização (Styled Components, ChakraUI)</li>
-                <li>Hooks</li>
-                <li>Context API</li>
-                <li>Redux</li>
-                <li>Integração com API</li>
-              </ul>
-            </div>
-          </SkillsBox>
-          <SkillsBox color="#84BD48">
-            <div className="title">
-              <div className="text">
-                <h3>Node.js</h3>
-                <h4>Back-end</h4>
+              <p className="desc">{skill?.description}</p>
+              <div className="skills-list">
+                <p>Conhecimentos:</p>
+                <ul>
+                  {skill.skills.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
               </div>
-              <img src={nodeImage} alt="Node.js" />
-            </div>
-            <p className="desc">
-              Node.js é um ambiente de execução Javascript que roda no lado do
-              servidor.
-            </p>
-            <div className="skills-list">
-              <p>Conhecimentos</p>
-              <ul>
-                <li>CRUD</li>
-                <li>API Rest</li>
-                <li>Autenticação (JWT)</li>
-                <li>MongoDB</li>
-              </ul>
-            </div>
-          </SkillsBox>
-          <SkillsBox color="#F7DF1E">
-            <div className="title">
-              <div className="text">
-                <h3>Javascript</h3>
-                <h4>Ling. de programação</h4>
-              </div>
-              <img src={javascriptImage} alt="Javascript" />
-            </div>
-            <p className="desc">
-              Javascript é uma linguagem de programação aplamente flexível
-              podendo ser utilizada no front-end, back-end, mobile e até
-              desktop.
-            </p>
-            <div className="skills-list">
-              <p>Conhecimentos</p>
-              <ul>
-                <li>CRUD</li>
-                <li>API Rest</li>
-                <li>Autenticação (JWT)</li>
-                <li>MongoDB</li>
-              </ul>
-            </div>
-          </SkillsBox>
-          <SkillsBox color="#36A3DC">
-            <div className="title">
-              <div className="text">
-                <h3>Typescript</h3>
-                <h4>Ling. de programação</h4>
-              </div>
-              <img src={typescriptImage} alt="Typescript" />
-            </div>
-            <p className="desc">
-              Javascript é uma linguagem de programação aplamente flexível
-              podendo ser utilizada no front-end, back-end, mobile e até
-              desktop.
-            </p>
-            <div className="skills-list">
-              <p>Conhecimentos</p>
-              <ul>
-                <li>CRUD</li>
-                <li>API Rest</li>
-                <li>Autenticação (JWT)</li>
-                <li>MongoDB</li>
-              </ul>
-            </div>
-          </SkillsBox>
+            </SkillsBox>
+          ))}
         </Container>
       </Wrapper>
     </>
@@ -126,3 +73,14 @@ const Skills: React.FC = () => {
 }
 
 export default Skills
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { skills } = await client.request<GetSkillsQuery>(GET_SKILLS)
+
+  return {
+    props: {
+      skills
+    },
+    revalidate: 60 * 60 * 24
+  }
+}
