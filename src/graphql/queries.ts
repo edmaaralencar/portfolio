@@ -49,3 +49,19 @@ export const GET_EXPERIENCES = gql`
     }
   }
 `
+
+export const GET_SKILLS = gql`
+  query getSkills {
+    skills {
+      id
+      title
+      category
+      description
+      skills
+      image {
+        url
+      }
+      color
+    }
+  }
+`
