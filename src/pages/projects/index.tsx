@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable camelcase */
 import React, { useState } from 'react'
 import Head from 'next/head'
