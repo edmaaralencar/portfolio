@@ -5,18 +5,12 @@ export const Wrapper = styled.section`
   width: 100%;
   padding: 0 2rem;
   margin: 0 auto;
-  margin-top: 5.6rem;
-  margin-bottom: 4rem;
 `
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4rem 8rem;
-
-  @media (max-width: 1350px) {
-    gap: 6rem;
-  }
+  gap: 4rem 6rem;
 
   @media (max-width: 1060px) {
     grid-template-columns: 1fr 1fr;

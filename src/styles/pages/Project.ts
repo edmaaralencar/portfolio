@@ -4,7 +4,7 @@ export const Wrapper = styled.section`
   max-width: 1180px;
   width: 100%;
   padding: 0 2rem;
-  margin: 5.6rem auto;
+  margin: 0 auto;
   color: #a8a8b3;
 
   .img-wrapper {

@@ -4,7 +4,7 @@ export const Wrapper = styled.section`
   max-width: ${props => props.theme.container};
   width: 100%;
   padding: 0 2rem;
-  margin: 5.6rem auto;
+  margin: 0 auto;
 `
 
 export const Container = styled.div`

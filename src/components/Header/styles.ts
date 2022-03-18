@@ -10,6 +10,7 @@ export const Container = styled.header`
   align-items: center;
 
   padding: 3rem 2rem;
+  margin-bottom: 2.4rem;
 
   button {
     background: transparent;

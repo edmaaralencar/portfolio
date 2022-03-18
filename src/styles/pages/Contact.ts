@@ -5,7 +5,7 @@ export const Wrapper = styled.form`
   padding: 4rem 5rem;
   width: 100%;
   max-width: 60rem;
-  margin: 3rem auto;
+  margin: 0 auto;
   border-radius: 0.8rem;
 
   @media (max-width: 610px) {
