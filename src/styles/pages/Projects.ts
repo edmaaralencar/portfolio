@@ -10,6 +10,7 @@ export const Wrapper = styled.section`
   width: 100%;
   padding: 0 2rem;
   margin: 0 auto;
+  margin-bottom: 2.4rem;
 `
 
 export const Categories = styled.div`
