@@ -17,6 +17,7 @@ export const Categories = styled.div`
   display: flex;
   align-items: center;
   gap: 1.6rem;
+  flex-wrap: wrap;
 
   margin-bottom: 3.2rem;
 `
