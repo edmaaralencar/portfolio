@@ -89,6 +89,10 @@ export const ProjectBox = styled(motion.div)`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.8rem;
+	  
+	  @media (max-width: 460px) {
+		grid-template-columns: 1fr;
+	  }
     }
   }
 
