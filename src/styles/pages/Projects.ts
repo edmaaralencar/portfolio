@@ -89,16 +89,15 @@ export const ProjectBox = styled(motion.div)`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.8rem;
-	  
-	  @media (max-width: 460px) {
-		grid-template-columns: 1fr;
-	  }
+
+      @media (max-width: 460px) {
+        grid-template-columns: 1fr;
+      }
     }
   }
 
   a {
     margin-top: 2.4rem;
-    /* margin-top: auto; */
     display: block;
     width: 100%;
     text-align: center;

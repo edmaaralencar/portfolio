@@ -5,6 +5,7 @@ export const Wrapper = styled.section`
   width: 100%;
   padding: 0 2rem;
   margin: 0 auto;
+  margin-bottom: 4rem;
   color: #a8a8b3;
 
   .img-wrapper {
@@ -51,37 +52,76 @@ export const Wrapper = styled.section`
     }
   }
 
+  a {
+    display: block;
+    padding: 1.3rem;
+    width: 100%;
+    max-width: 15rem;
+    background-color: ${props => props.theme.colors.primary};
+    color: #ffffff;
+    font-size: 2rem;
+    border-radius: 0.8rem;
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+
+    &.outlined {
+      background-color: transparent;
+      border: 1px solid ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.primary};
+    }
+
+    svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+
   .cta {
     margin-top: 3.2rem;
 
     display: flex;
     gap: 1.6rem;
+  }
 
-    a {
-      display: block;
-      padding: 1.3rem;
-      width: 100%;
-      max-width: 15rem;
-      background-color: ${props => props.theme.colors.primary};
-      color: #ffffff;
-      font-size: 2rem;
-      border-radius: 0.8rem;
-      text-decoration: none;
+  .cta-fullstack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
 
+    margin: 4rem 0;
+
+    .top {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.8rem;
+      gap: 1.6rem;
+    }
 
-      &.outlined {
+    .bottom {
+      .website-fullstack {
+        display: block;
+        padding: 1.3rem;
+        width: 100%;
+        max-width: 31.6rem;
+        font-size: 2rem;
+        border-radius: 0.8rem;
+        text-decoration: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+
         background-color: transparent;
         border: 1px solid ${props => props.theme.colors.primary};
         color: ${props => props.theme.colors.primary};
-      }
 
-      svg {
-        width: 2.4rem;
-        height: 2.4rem;
+        svg {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
       }
     }
   }

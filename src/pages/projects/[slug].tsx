@@ -74,23 +74,56 @@ const Projects = ({ project }: ProjectProps) => {
             </ul>
           </div>
 
-          <div className="cta">
-            {project?.github_link !== null && (
-              <a target="_blank" rel="noreferrer" href={project?.github_link}>
-                <GithubIcon /> Github
-              </a>
-            )}
-            {project?.website_link !== null && (
-              <a
-                target="_blank"
-                rel="noreferrer"
-                className="outlined"
-                href={project?.website_link}
-              >
-                Site
-              </a>
-            )}
-          </div>
+          {project.github_link.split(',')[1] ? (
+            <div className="cta-fullstack">
+              <div className="top">
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={project.github_link.split(',')[0]}
+                >
+                  <GithubIcon /> Front
+                </a>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={project.github_link.split(',')[1]}
+                >
+                  <GithubIcon /> Back
+                </a>
+              </div>
+              <div className="bottom">
+                {project?.website_link !== null && (
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    className="website-fullstack"
+                    href={project?.website_link}
+                  >
+                    Site
+                  </a>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="cta">
+              {project?.github_link !== null && (
+                <a target="_blank" rel="noreferrer" href={project?.github_link}>
+                  <GithubIcon /> Github
+                </a>
+              )}
+              {project?.website_link !== null && (
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className="outlined"
+                  href={project?.website_link}
+                >
+                  Site
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </Wrapper>
     </>
