@@ -74,7 +74,7 @@ const Projects = ({ project }: ProjectProps) => {
             </ul>
           </div>
 
-          {project.github_link.split(',')[1] ? (
+          {project.github_link && project.github_link.split(',')[1] ? (
             <div className="cta-fullstack">
               <div className="top">
                 <a
